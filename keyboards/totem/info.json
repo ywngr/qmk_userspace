@@ -1,0 +1,30 @@
+{
+    "manufacturer": "GEIST",
+    "keyboard_name": "TOTEM",
+    "bootloader": "rp2040",
+    "build": {
+        "lto": false
+    },
+    "debounce": 5,
+    "diode_direction": "COL2ROW",
+    "mouse_key": {
+        "enabled": false
+    },
+    "processor": "RP2040",
+    "split": {
+        "enabled": true,
+        "serial": {
+            "driver": "vendor",
+            "pin": "GP0"
+        }
+    },
+    "url": "https://github.com/GEIGEIGEIST/TOTEM",
+    "usb": {
+        "device_version": "0.3.0",
+        "pid": "0x0002",
+        "vid": "0x3A3C"
+    },
+    "ws2812": {
+        "driver": "vendor"
+    },
+}
