@@ -97,7 +97,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_25] = ACTION_TAP_DANCE_DOUBLE(KC_P,KC_RPRN),
     [TD_26] = ACTION_TAP_DANCE_DOUBLE(KC_V,KC_HASH),
     [TD_27] = ACTION_TAP_DANCE_DOUBLE(KC_Z,KC_AMPR),
-    [TD_28] = ACTION_TAP_DANCE_DOUBLE(KC_COMM,KC_LCBR),
+    [TD_28] = ACTION_TAP_DANCE_DOUBLE(KC_DOT,KC_COMM),
     [TD_29] = ACTION_TAP_DANCE_DOUBLE(KC_DOT,KC_RCBR),
     [TD_30] = ACTION_TAP_DANCE_DOUBLE(KC_QUOTE,KC_DQUO),
     [TD_31] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH,KC_CIRC),
@@ -140,9 +140,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              ├─11──────┼─12──────┼─13──────┼─14──────┼─15──────┤├─16──────┼─17──────┼─18──────┼─19──────┼─20──────┤
              │  ◆ R    │  ⌥ S    │  ⇧ T    │  ⎈ H    │    K    ││    J    │    N ⎈  │    E ⇧  │    A ⌥  │    I ◆  │
    ┌─21──────┼─22──────┼─23──────┼─24──────┼─25──────┼─26──────┤├─27──────┼─28──────┼─29──────┼─30──────┼─31──────┼─32──────┐
-   │  : esc  │    X    │    C    │    M    │    P    │    V    ││    Z    │    .    │    ,    │    '    │    /    │    *    │
+   │    ⌫    │    X    │    C    │    M    │    P    │    V    ││    Z    │    .,   │    =    │    '    │    /    │  Enter  │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │   esc   │    ⇥    │    ␣    ││    ⌫    │    ↵    │    ⌦    │
+                                 │  Home   │  Escape │    ␣    ││    ␣    │    ⇥    │    ⌦    │
                                  | mouse fn| num nav |   sym   ||   sym   | num nav | mouse fn|
                                  └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘
 */
@@ -150,8 +150,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
                 KC_W,     KC_G,     KC_D,     KC_F,     KC_B,       KC_Q,    KC_L,      KC_U,    KC_O,      KC_Y,  
           LGUI_T(KC_R),LALT_T(KC_S),LSFT_T(KC_T),LCTL_T(KC_H),KC_K,KC_J, LCTL_T(KC_N),RSFT_T(KC_E),LALT_T(KC_A),LGUI_T(KC_I),  
-      TD(TD_21),   KC_X,    KC_C,     KC_M,     KC_P,     KC_V,       KC_Z,   KC_DOT,   KC_COMM,  KC_QUOTE, KC_SLSH, KC_ASTR,
-    LT(_MOUSE_FUN,KC_ESC), LT(_NUM_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_SYM,KC_BSPC),LT(_NUM_NAV,KC_ENT), LT(_MOUSE_FUN,KC_DEL)
+      KC_BSPC,  KC_X,    KC_C,     KC_M,     KC_P,     KC_V,       KC_Z,   TD(TD_28),   KC_EQL, KC_QUOTE, KC_SLSH, KC_ENT,
+    LT(_MOUSE_FUN,KC_HOME),LT(_NUM_NAV, KC_ESC), LT(_SYM, KC_SPC), LT(_SYM,KC_SPC),LT(_NUM_NAV,KC_TAB), LT(_MOUSE_FUN,KC_DEL)
  ),
   /*   
    ┌─────────────────────────────────────────────────┐
@@ -160,9 +160,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
      ╌┄┈┈───═╡         │    <    │    $    │    >    │         ││         │    [    │    _    │    ]    │    @    │   
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤─────────┐
-   │    -    │    \    │    (    │    "    │    )    │    #    ││    |    │    {    │    =    │    }    │    %    │    ;    │
+   │    -    │    \    │    (    │    "    │    )    │    #    ││    |    │    {    │    :    │    }    │    %    │    ;    │
    └─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┘
-             │         │    `    │    !    │    +    │         ││         │    &    │    ^    │    ~    │         │
+             │         │    `    │    !    │    +    │         ││         │    &    │    ^    │    ~    │    *    │
              └─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┘
                                  │         │         │         ││         │         │         │  
                                  └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */ 
@@ -170,30 +170,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_SYM] = LAYOUT(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
               _______,   KC_LT,   KC_DLR,     KC_GT,   _______,   _______,  KC_LBRC,  KC_UNDS,  KC_RBRC,   KC_AT,
-              KC_BSLS,  KC_LPRN,   KC_DQUO,  KC_RPRN,  KC_HASH,   KC_PIPE,  KC_LCBR,   KC_EQL,  KC_RCBR,  KC_PERC,  
-    KC_MINS,  _______,  KC_GRV,   KC_EXLM,   KC_PLUS,  _______,   _______,  KC_AMPR,   KC_CIRC,  KC_TILD, _______,  KC_SCLN,
+              KC_BSLS,  KC_LPRN,   KC_DQUO,  KC_RPRN,  KC_HASH,   KC_PIPE,  KC_LCBR,  KC_COLON,  KC_RCBR,  KC_PERC,  
+    KC_MINS,  _______,  KC_GRV,   KC_EXLM,   KC_PLUS,  _______,   _______,  KC_AMPR,   KC_CIRC,  KC_TILD, KC_ASTR,  KC_SCLN,
                                    _______,  _______,  _______,   _______,  _______,   _______
  ),
- /*
+ /*   
    ┌─────────────────────────────────────────────────┐
-   │ q w e r t y                                     │      ╭╮╭╮╭╮╭╮
+   │ n u m  +  n a v                                 │      ╭╮╭╮╭╮╭╮
    └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
              ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
-     ╌┄┈┈───═╡    Q    │    W    │    E    │    R    │    T    ││    Y    │    U    │    I    │    O    │    P    │   
+     ╌┄┈┈───═╡         │    7    │    8    │    9    │   + -   ││  PASTE  │   HOME  │    ↑    │   PGUP  │  SHIFT  │   
              ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
-             │  ◆ A    │  ⌥ S    │  ⇧ D    │  ⎈ F    │    G    ││    H    │   ⎈ J   │   ⇧ K   │   ⌥ L   │   ◆ ;   │    
+             │  ◆ 0    │  ⌥ 4    │  ⇧ 5    │  ⎈ 6    │   * /   ││   CUT   │    ←    │    ↓    │    →    │ CONTROL │   
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │    :    │    Z    │    X    │    C    │    V    │    B    ││    N    │    M    │    ,    │    .    │    /    │    *    │
+   │         │         │    1    │    2    │    3    │   . ,   ││   COPY  │   END   │   UNDO  │   PGDN  │   INS   │         │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │   Esc   │   Tab   │  SPACE  ││  SPACE  │   BSPC  │   Del   │  
-                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘*/ 
+                                 │         │         │         ││         │         │         │  
+                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */ 
 
-   [_QWERTY] = LAYOUT(
+   [_NUM_NAV] = LAYOUT(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
-                 KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,      KC_U,     KC_I,     KC_O,  KC_P,  
-       LGUI_T(KC_A),LALT_T(KC_S), LSFT_T(KC_D),LCTL_T(KC_F), KC_G, KC_H,  LCTL_T(KC_J),RSFT_T(KC_K),LALT_T(KC_L),  LGUI_T(KC_SCLN),    
-KC_COLON,     KC_Z,     KC_X,     KC_C, TD(TD_V_ENT), KC_B,     KC_N,  TD(TD_M_ENT),KC_COMM,  KC_DOT, KC_SLSH, TD(TD_QWERTY),
-    LT(_MOUSE_FUN,KC_ESC), LT(_NUM_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_SYM,KC_SPC),LT(_NUM_NAV,KC_BSPC), LT(_MOUSE_FUN,KC_DEL)
+              _______,    KC_7,     KC_8,    KC_9,TD(TD_PLUS_MINUS),   KC_PSTE,  KC_HOME,  KC_UP,    KC_PGUP,  KC_LSFT,   
+LGUI_T(KC_0),LALT_T(KC_4),LSFT_T(KC_5),LCTL_T(KC_6),TD(TD_MPLY_DIVIDE),KC_CUT,  KC_LEFT,  KC_DOWN,  KC_RIGHT, KC_LCTL,
+   XXXXXXX,   _______,    KC_1,     KC_2,      KC_3,TD(TD_DOT_COMMA),KC_COPY,  KC_END,   KC_UNDO,  KC_PGDN,  KC_INS,  XXXXXXX,
+                               _______,     _______,  _______,   _______,  _______,  _______  
  ),
  /*   
    ┌─────────────────────────────────────────────────┐
@@ -216,26 +216,26 @@ LGUI_T(KC_F5),LALT_T(KC_F6),LSFT_T(KC_F7),LCTL_T(KC_F8),   KC_VOLU,   KC_MPLY,  
    XXXXXXX,    KC_F1,    KC_F2,     KC_F3,    KC_F4,   KC_VOLD,   KC_MUTE,  _______,  _______,  _______,  _______,  _______, 
                                    _______,  _______,  _______,   MS_BTN1,  MS_BTN2,  MS_BTN3
  ),
- /*   
+ /*
    ┌─────────────────────────────────────────────────┐
-   │ n u m  +  n a v                                 │      ╭╮╭╮╭╮╭╮
+   │ q w e r t y                                     │      ╭╮╭╮╭╮╭╮
    └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
              ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
-     ╌┄┈┈───═╡         │    7    │    8    │    9    │   + -   ││  PASTE  │   HOME  │    ↑    │   PGUP  │  SHIFT  │   
+     ╌┄┈┈───═╡    Q    │    W    │    E    │    R    │    T    ││    Y    │    U    │    I    │    O    │    P    │   
              ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
-             │  ◆ 0    │  ⌥ 4    │  ⇧ 5    │  ⎈ 6    │   * /   ││   CUT   │    ←    │    ↓    │    →    │ CONTROL │   
+             │  ◆ A    │  ⌥ S    │  ⇧ D    │  ⎈ F    │    G    ││    H    │   ⎈ J   │   ⇧ K   │   ⌥ L   │   ◆ ;   │    
    ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │         │         │    1    │    2    │    3    │   . ,   ││   COPY  │   END   │   UNDO  │   PGDN  │   INS   │         │
+   │    :    │    Z    │    X    │    C    │    V    │    B    ││    N    │    M    │    ,    │    .    │    /    │    *    │
    └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │         │         │         ││         │         │         │  
-                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */ 
+                                 │   Esc   │   Tab   │  SPACE  ││  SPACE  │   BSPC  │   Del   │  
+                                 └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘*/ 
 
-   [_NUM_NAV] = LAYOUT(
+   [_QWERTY] = LAYOUT(
  //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
-              _______,    KC_7,     KC_8,    KC_9,TD(TD_PLUS_MINUS),   KC_PSTE,  KC_HOME,  KC_UP,    KC_PGUP,  KC_LSFT,   
-LGUI_T(KC_0),LALT_T(KC_4),LSFT_T(KC_5),LCTL_T(KC_6),TD(TD_MPLY_DIVIDE),KC_CUT,  KC_LEFT,  KC_DOWN,  KC_RIGHT, KC_LCTL,
-   XXXXXXX,   _______,    KC_1,     KC_2,      KC_3,TD(TD_DOT_COMMA),KC_COPY,  KC_END,   KC_UNDO,  KC_PGDN,  KC_INS,  XXXXXXX,
-                               _______,     _______,  _______,   _______,  _______,  _______  
+                 KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,      KC_U,     KC_I,     KC_O,  KC_P,  
+       LGUI_T(KC_A),LALT_T(KC_S), LSFT_T(KC_D),LCTL_T(KC_F), KC_G, KC_H,  LCTL_T(KC_J),RSFT_T(KC_K),LALT_T(KC_L),  LGUI_T(KC_SCLN),    
+KC_COLON,     KC_Z,     KC_X,     KC_C, TD(TD_V_ENT), KC_B,     KC_N,  TD(TD_M_ENT),KC_COMM,  KC_DOT, KC_SLSH, TD(TD_QWERTY),
+    LT(_MOUSE_FUN,KC_ESC), LT(_NUM_NAV, KC_TAB), LT(_SYM, KC_SPC), LT(_SYM,KC_SPC),LT(_NUM_NAV,KC_BSPC), LT(_MOUSE_FUN,KC_DEL)
  ),
 /*
    ┌─────────────────────────────────────────────────┐
